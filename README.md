@@ -154,7 +154,7 @@ Se agrega una `evento Change` y un `*ngFor` para poder traer como *opciones* tod
 Para poner un texto traducido con `parametros`, se debe poner el siguiente codigo:
 
 ```html
-<h3>{{ 'GREETING' | translate:{name:'nicolas'} }}</h3>
+<h3>{{ 'GREETING' | translate:{name:'Kevin'} }}</h3>
 ```
 *name* sería el parametro que se envía al `JSON` del lenguaje actual
 <hr>
@@ -173,12 +173,14 @@ Con el siguiente codigo se puede llamar el contenido del atributo del objeto con
 Dentro *app.component.ts*, en el `controlador` se pone dentro del `constructor() { AQUI }`
 
 ```typescript
-this.translate.stream('GREETING', {name: 'nicolas'})
+this.translate.stream('GREETING', {name: 'Kevin'})
 .subscribe((res: string) => {
   console.log(res);
 });
 ```
 <hr>
+
+Para hacer contenido Html como un `<strong>` se puede agregar asi normalmente en el JSON.
 
 ```json
 "GREETING": "Hello  <strong>{{name}}</strong>, nice to meet you.",
@@ -186,8 +188,9 @@ this.translate.stream('GREETING', {name: 'nicolas'})
 ```
 <hr>
 
+Pero, se debe agregar esto en el html para que lo reciba como algo de html.
 ```html
-<div [innerHTML]="'GREETING' | translate:{name: 'nicolas'}"></div>
+<div [innerHTML]="'GREETING' | translate:{name: 'Kevin'}"></div>
 ```
 <hr>
 <hr>
