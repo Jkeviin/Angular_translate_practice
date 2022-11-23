@@ -1,12 +1,1 @@
-<h1>{{ 'HELLO' | translate }}</h1>
-<!-- Subrayado -->
-<h3 [innerHTML] = " 'GREETING' | translate:{name:'Kevin'} "> </h3>
-<label>
-  change
-  <select #langSelect (change)="changeLang(langSelect.value)">
-    <option *ngFor="let lang of langs" [value]="lang">
-      {{ lang }}
-    </option>
-  </select>
-</label>
 <router-outlet></router-outlet>
