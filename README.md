@@ -8,7 +8,7 @@ Instalar en CLI `Angular Translate`.
 npm install @ngx-translate/core --save
 npm install @ngx-translate/http-loader --save
 ```
-<hr>
+#
 
 Importar Dependencias de Angular Translate en `app.module.ts`.
 
@@ -17,7 +17,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 ````
-<hr>
+#
 
 Crear función exportable para no tener conflictos con AOT (compilación de alto nivel) en `app.module.ts`.
 
@@ -26,7 +26,7 @@ export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 ```
-<hr>
+#
 
 Configuración para que Angular Translate quede funcionando bien, se pone igualmente en `app.module.ts`, se pone dentro `imports: []`.
 
@@ -40,7 +40,7 @@ TranslateModule.forRoot({
     }
 })
 ```
-<hr>
+#
 
 Importar *Servicio* de Angular Translate en `app.component.ts`
 
@@ -61,7 +61,7 @@ export class AppComponent {
   }
 }
 ```
-<hr>
+#
 
 Se debe crear los archivos donde estarán los diferentes lenguajes de texto.
 
@@ -84,7 +84,7 @@ En este caso español e ingles:
   "HELLO": "Hola mundo"
 }
 ```
-<hr>
+#
 
 Para probarlo, en el HTML `app.component.html` se agrega la siguiente sintaxis:
 
@@ -93,7 +93,7 @@ Para probarlo, en el HTML `app.component.html` se agrega la siguiente sintaxis:
 ```
 
 Se verá *HELLO* de .json dependiendo el lenguaje que esté selencionado.
-<hr>
+#
 
 Con el siguiente codigo se puede llamar el contenido del atributo del objeto.
 Dentro *app.component.ts*, en el `controlador` se pone dentro del `constructor() { AQUI }`
@@ -107,7 +107,7 @@ Dentro *app.component.ts*, en el `controlador` se pone dentro del `constructor()
       //=> 'Hola mundo'
     });
 ```
-<hr>
+#
 
 Para comenzar a hacer **dinamico**, se debe agregar `addLangs` y `getLangs` dentro del constructor y crear una variable de tipo arreglo para guardar el contenido.
 
@@ -134,7 +134,7 @@ export class AppComponent {
   }
 }
 ```
-<hr>
+#
 
 En el HTML, se agrega un select para poder *manipular* el lenguaje de la pagina. 
 Se agrega una `evento Change` y un `*ngFor` para poder traer como *opciones* todos los lenguajes.
@@ -149,7 +149,7 @@ Se agrega una `evento Change` y un `*ngFor` para poder traer como *opciones* tod
   </select>
 </label>
 ````
-<hr>
+#
 
 Para poner un texto traducido con `parametros`, se debe poner el siguiente codigo:
 
@@ -157,17 +157,19 @@ Para poner un texto traducido con `parametros`, se debe poner el siguiente codig
 <h3>{{ 'GREETING' | translate:{name:'Kevin'} }}</h3>
 ```
 *name* sería el parametro que se envía al `JSON` del lenguaje actual
-<hr>
+#
 
 En los JSON se les agrega el siguiente codigo:
 
 ```json
+// en.json
 "GREETING": "Hello {{name}}, nice to meet you."
+// es.json
 "GREETING": "Hola {{name}}, un gusto conocerte."
 ```
 El `{{name}}` seria el parametro que recibe.
 
-<hr>
+#
 
 Con el siguiente codigo se puede llamar el contenido del atributo del objeto con **ATRIBUTOS**.
 Dentro *app.component.ts*, en el `controlador` se pone dentro del `constructor() { AQUI }`
@@ -178,21 +180,24 @@ this.translate.stream('GREETING', {name: 'Kevin'})
   console.log(res);
 });
 ```
-<hr>
+#
 
 Para hacer contenido Html como un `<strong>` se puede agregar asi normalmente en el JSON.
 
 ```json
+// en.json
 "GREETING": "Hello  <strong>{{name}}</strong>, nice to meet you.",
+// es.json
 "GREETING": "Hola <strong>{{name}}</strong>, un gusto conocerte."
 ```
-<hr>
+#
 
 Pero, se debe agregar esto en el html para que lo reciba como algo de html.
 ```html
 <div [innerHTML]="'GREETING' | translate:{name: 'Kevin'}"></div>
 ```
-<hr>
+#
+
 <hr>
 <hr>
 
